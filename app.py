@@ -1,9 +1,9 @@
-from flask import Flask, flash
+from flask import Flask, flash, jsonify
 from flask import render_template
 from flask import request
 from flask import redirect, url_for
 from os import listdir
-#from main import Manager
+import json
 
 app = Flask(__name__)
 
@@ -22,17 +22,16 @@ def main_page():
 def purchase():
     return render_template('purchase.html')
 
-@app.route('/handle_get_purchase', methods=['GET'])
+@app.route('/Purchase_get', methods=['GET'])
 def handle_get_purchase():
     if request.method == 'GET':
-        productname = request.args['productname']
-        quantity = request.args['quantity']
-        price = request.args['price']
-        print(productname, quantity, price)
-
-        return redirect(url_for('Purchase'))
-    else:
-        return render_template('task.html')
+        productname = request.form.get['productname']
+        quantity = request.form.get['quantity']
+        price = request.form.get['price']
+        return jsonify(productname, quantity, price)
+    return render_template("purchase.html")
+        #return render_template('purchase.html')
+        #return json.dumps(request.form)
 
 #http://127.0.0.1:5000/Sale
 @app.route("/Sale", methods = ['GET'])
@@ -46,7 +45,6 @@ def handle_get_sale():
         salequantity = request.args['salequantity']
         saleprice = request.args['saleprice']
         print(saleproductname, salequantity, saleprice)
-
         return redirect(url_for('/Sale'))
     else:
         return render_template('task.html')
@@ -61,7 +59,6 @@ def get_balance():
     if request.method == 'GET':
         money = request.args['money']
         print(money)
-
         return render_template('balance.html')
     
     else:
