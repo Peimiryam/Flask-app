@@ -15,6 +15,10 @@
                     height="500">
                     <h1>Sell Products</h1>
                 </div>
+
+            {% for msg in get_flashed_messages() %}
+            <h2>{{ msg }} </h2>
+            {% endfor %}
             
             <div class="column col-10 p-centered">
                 <div class="columns">
@@ -28,7 +32,7 @@
                                 <div class = "column col-10 col-mr-auto"></div>
                                 <div class = "column col-10 pt-centered mt-2"></div>
                                 <div class="form-group">
-                                    <form action="http://127.0.0.1:5000/Sale" method="get">
+                                    <form action="http://127.0.0.1:5000/Sale" method="post">
                                         <form onsubmit="return false;">
                                         <label class="form-label" for="input1">Product Name</label>
                                         <input class="form-input" type="text" id="input1" name = saleproductname placeholder="Productname" required minlength="1">

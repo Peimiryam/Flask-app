@@ -15,6 +15,10 @@
                     height="500">
                     <h1>Add or subtract from balance</h1>
                 </div>
+
+            {% for msg in get_flashed_messages() %}
+            <h2>{{ msg }} </h2>
+            {% endfor %}
             
             <div class="column col-10 p-centered">
                 <div class="columns">
@@ -28,9 +32,9 @@
                                 <div class = "column col-10 pt-centered mt-2">
                                 <p> Input the quantity you want to add or subtract: </p>
                                     <h1>Balance</h1>
-                                    <form action="http://127.0.0.1:5000/Balance" method="get">
+                                    <form action="http://127.0.0.1:5000/Balance" method="post">
                                         <form onsubmit="return false;">
-                                        <input class="result" type="text" name = money id="money" value=0 required minlength="1"/>
+                                        <input class="result" type="number" name = money id="money" value=0 required minlength="1"/>
                                         <button onClick="valInc()">Add</button>
                                         <button onClick="valDec()">Subtract</button>
                                         </form>
